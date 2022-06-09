@@ -1,8 +1,8 @@
 package main
 
 import (
-	models "backgo/src/models"
-	routes "backgo/src/routes"
+	models "github.com/matiaslamela/go-ecom/src/models"
+	routes "github.com/matiaslamela/go-ecom/src/routes"
 
 	"github.com/gin-gonic/gin"
 )

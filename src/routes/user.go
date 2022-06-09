@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"backgo/src/controllers"
+	"github.com/matiaslamela/go-ecom/src/controllers"
 
 	"github.com/gin-gonic/gin"
 )

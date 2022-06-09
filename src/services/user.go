@@ -1,7 +1,7 @@
 package services
 
 import (
-	models "backgo/src/models"
+	models "github.com/matiaslamela/go-ecom/src/models"
 )
 
 func GetUsers() ([]models.User, error) {

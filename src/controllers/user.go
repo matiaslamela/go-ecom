@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"backgo/src/services"
 	"net/http"
+
+	"github.com/matiaslamela/go-ecom/src/services"
 
 	"github.com/gin-gonic/gin"
 )

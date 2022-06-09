@@ -1,4 +1,4 @@
-module backgo
+module github.com/matiaslamela/go-ecom
 
 go 1.18
 
