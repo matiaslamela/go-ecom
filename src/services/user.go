@@ -13,11 +13,27 @@ func GetUsers() ([]models.User, error) {
 	return users, nil
 }
 
-func CreateUser(input CreateUserInput) (*models.User, error) {
-	user := &models.User{Name: input.Name, Email: input.Email, Age: input.Age}
-	result := models.DB.Create(&user)
+func insertUsers(input CreateUserInput, userChannel chan *models.User, errChannel chan error) {
+	userBuffer := &models.User{Name: input.Name, Email: input.Email, Age: input.Age}
+	result := models.DB.Create(&userBuffer)
 	if result.Error != nil {
-		return nil, result.Error
+		userChannel <- nil
+		errChannel <- result.Error
+		return
 	}
-	return user, nil
+	userChannel <- userBuffer
+	errChannel <- nil
+	return
+}
+
+func CreateUser(input CreateUserInput) (*models.User, error) {
+	userChannel := make(chan *models.User)
+	errChannel := make(chan error)
+	go insertUsers(input, userChannel, errChannel)
+	createdUser := <-userChannel
+	creationError := <-errChannel
+	if creationError != nil {
+		return nil, creationError
+	}
+	return createdUser, nil
 }
