@@ -3,14 +3,20 @@ package models
 import (
 	"fmt"
 
+	enviroment "github.com/matiaslamela/go-ecom/src/env"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var DB *gorm.DB
 
+func queryStringBuilder() string {
+	return "host=" + enviroment.DB_HOST + " user=" + enviroment.DB_USER + " password=" + enviroment.DB_PASSWORD + " dbname=" + enviroment.DB_NAME + " port=" + enviroment.DB_PORT + " sslmode=disable"
+}
+
 func Connect() {
-	dsn := "host=localhost user=postgres password=1234 dbname=go_prueba port=5432 sslmode=disable"
+	dsn := queryStringBuilder()
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println(err.Error())
